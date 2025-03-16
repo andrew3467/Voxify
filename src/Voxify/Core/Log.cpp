@@ -19,5 +19,7 @@ namespace Voxify {
 
         sCoreLogger = spdlog::stdout_color_mt("Tungsten");
         sCoreLogger->set_level(spdlog::level::trace);
+
+        VOXIFY_INFO("Logger Initialized");
     }
 } // Voxify

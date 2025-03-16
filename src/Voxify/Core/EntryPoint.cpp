@@ -5,8 +5,11 @@
 #include "../Voxify.h"
 
 int main() {
-    Voxify::Log::Init();
-    VOXIFY_INFO("Test");
+    auto* app = Voxify::Application::CreateApplication();
+
+    app->Run();
+
+    delete app;
 
     return 1;
 }

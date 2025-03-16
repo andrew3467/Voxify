@@ -7,6 +7,7 @@
 
 
 //Core
+#include "Voxify/Core/Application.h"
 #include "Voxify/Core/Log.h"
 
 
