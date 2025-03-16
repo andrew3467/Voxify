@@ -9,7 +9,7 @@ add_subdirectory(External)
 file(GLOB_RECURSE SRC src/*.cpp)
 file(GLOB_RECURSE HEADERS src/*.h)
 
-add_library(
+add_executable(
         Voxify
         ${SRC}
         ${HEADERS}
