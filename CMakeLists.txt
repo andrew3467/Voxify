@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.29)
-project(src/Voxify)
+project(Voxify)
 
 set(CMAKE_CXX_STANDARD 23)
 
