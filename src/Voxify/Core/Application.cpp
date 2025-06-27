@@ -2,7 +2,9 @@
 // Created by Andrew Graser on 3/15/2025.
 //
 
-#include <Event/InputEvent.h>
+#include "../Voxify.h"
+
+#include <GLFW/glfw3.h>
 #include "Application.h"
 
 
@@ -19,27 +21,24 @@ namespace Voxify {
     }
 
     Application::Application()
-        : mWindowResizeHandler([this](const WindowResizeEvent& e) { OnWindowResizeEvent(e);}),
-          mKeyPressHandler([this](const KeyPressEvent& e) { OnKeyPressEvent(e);}),
-          mKeyReleaseHandler([this](const KeyReleaseEvent& e) { OnKeyReleaseEvent(e);})
+        : mWindowResizeHandler([this](const WindowResizeEvent& e) { OnWindowResizeEvent(e);})
     {
         Init();
     }
 
     Application::~Application() {
         EventSystem::Unsubscribe<WindowResizeEvent>(mWindowResizeHandler);
-        EventSystem::Unsubscribe<KeyPressEvent>(mKeyPressHandler);
-        EventSystem::Unsubscribe<KeyReleaseEvent>(mKeyReleaseHandler);
     }
 
     void Application::Init() {
         Log::Init();
 
+        mWindow = std::make_shared<Window>();
+
+        Input::Init();
 
 
         EventSystem::Subscribe<WindowResizeEvent>(mWindowResizeHandler);
-        EventSystem::Subscribe<KeyPressEvent>(mKeyPressHandler);
-        EventSystem::Subscribe<KeyReleaseEvent>(mKeyReleaseHandler);
 
         mRunning = true;
         VOXIFY_INFO("Engine Initialized");
@@ -47,14 +46,13 @@ namespace Voxify {
 
     void Application::Run() {
 
-        Window window;
 
         while(mRunning) {
-
+            //if(Input::GetKey(GLFW_KEY_W)) VOXIFY_INFO("W Down");
 
 
             EventSystem::DispatchEvents();
-            window.Update();
+            mWindow->Update();
         }
 
         VOXIFY_INFO("Exiting Application");
@@ -66,13 +64,5 @@ namespace Voxify {
 
     void Application::OnWindowResizeEvent(const WindowResizeEvent &e) {
         VOXIFY_INFO("Width: {0}, Height: {1}", e.Width, e.Height);
-    }
-
-    void Application::OnKeyPressEvent(const KeyPressEvent &e) {
-        VOXIFY_INFO("Key Pressed: {0}", e.KeyCode);
-    }
-
-    void Application::OnKeyReleaseEvent(const KeyReleaseEvent &e) {
-        VOXIFY_INFO("Key Released: {0}", e.KeyCode);
     }
 }

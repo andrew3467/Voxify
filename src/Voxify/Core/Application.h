@@ -5,12 +5,13 @@
 
 #pragma once
 
-#include "../Voxify.h"
 #include <Event/ApplicationEvent.h>
-#include <Event/InputEvent.h>
-#include <Event/Event.h>
+#include "Window.h"
+
 
 namespace Voxify {
+
+
     class Application {
     public:
         static Application* sApplication;
@@ -22,6 +23,8 @@ namespace Voxify {
         Application();
         ~Application();
 
+        Window& GetWindow() {return *mWindow;}
+
         void Run();
         void Close();
 
@@ -29,17 +32,11 @@ namespace Voxify {
         void OnWindowResizeEvent(const WindowResizeEvent &e);
         EventHandler<WindowResizeEvent> mWindowResizeHandler;
 
-        void OnKeyPressEvent(const KeyPressEvent &e);
-        EventHandler<KeyPressEvent> mKeyPressHandler;
-
-        void OnKeyReleaseEvent(const KeyReleaseEvent &e);
-        EventHandler<KeyReleaseEvent> mKeyReleaseHandler;
-
         void Init();
 
     private:
         bool mRunning = false;
 
-
+        std::shared_ptr<Window> mWindow;
     };
 }

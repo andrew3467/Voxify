@@ -4,8 +4,10 @@
 
 #include "Window.h"
 
-#include <GLFW/glfw3.h>
 #include <Event/InputEvent.h>
+#include "Application.h"
+
+#include <GLFW/glfw3.h>
 
 bool sGLFWInitialized = false;
 

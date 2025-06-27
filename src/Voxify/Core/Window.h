@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include "../Voxify.h"
-
 class GLFWwindow;
 
 namespace Voxify {
@@ -27,6 +25,8 @@ namespace Voxify {
         ~Window();
 
         void Update();
+
+        GLFWwindow* GetNativeWindow() const {return mWindowHandle;}
 
         void ToggleCursor(bool b);
 
